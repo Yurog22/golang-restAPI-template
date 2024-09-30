@@ -1,0 +1,224 @@
+basePath: /
+definitions:
+  entities.Example:
+    properties:
+      createdAt:
+        example: "2024-06-19T17:05:21.418722+07:00"
+        type: string
+      id:
+        example: 2badcae8-3b24-45f1-bdda-d8ed87c3d002
+        type: string
+      intValue:
+        example: 1
+        type: integer
+      stringValue:
+        example: string
+        type: string
+      updatedAt:
+        example: "2024-06-19T17:05:21.418722+07:00"
+        type: string
+    required:
+    - id
+    type: object
+  handlers.CreateExample.createExampleInput:
+    properties:
+      intValue:
+        example: 4
+        type: integer
+      stringValue:
+        example: string value
+        type: string
+    required:
+    - intValue
+    - stringValue
+    type: object
+  handlers.UpdateExample.updateExampleInput:
+    properties:
+      id:
+        example: 2badcae8-3b24-45f1-bdda-d8ed87c3d002
+        type: string
+      intValue:
+        example: 4
+        type: integer
+      stringValue:
+        example: string value
+        type: string
+    required:
+    - id
+    - intValue
+    - stringValue
+    type: object
+  responses.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Template API
+  title: Template API
+  version: "1.0"
+paths:
+  /example:
+    post:
+      consumes:
+      - application/json
+      description: Create example database record
+      parameters:
+      - description: Create example
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateExample.createExampleInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/responses.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entities.Example'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Response'
+      summary: Create example
+      tags:
+      - Example
+    put:
+      consumes:
+      - application/json
+      description: Update example database record
+      parameters:
+      - description: Update example
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateExample.updateExampleInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/responses.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entities.Example'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Response'
+      summary: Update example
+      tags:
+      - Example
+  /example/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete example database record by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Response'
+      summary: Delete example
+      tags:
+      - Example
+    get:
+      consumes:
+      - application/json
+      description: Get example database records by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/responses.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entities.Example'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Response'
+      summary: Get example
+      tags:
+      - Example
+  /example/list:
+    get:
+      consumes:
+      - application/json
+      description: List all example database records
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/responses.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/entities.Example'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/responses.Response'
+      summary: List examples
+      tags:
+      - Example
+swagger: "2.0"
